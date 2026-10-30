@@ -96,7 +96,7 @@ class TransactionTests(unittest.TestCase):
 
     def test_windows_output_supports_russian_in_pipes(self):
         binary = io.BytesIO()
-        stream = io.TextIOWrapper(binary, encoding='cp1252')
+        stream = io.TextIOWrapper(binary, encoding='cp1252', newline='\n')
         with patch.object(module.os, 'name', 'nt'), patch.object(module.sys, 'stdout', stream):
             module.configure_output()
             print('Проверка кодировки')
