@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "version": "0.1.0-experimental",
+  "base_repository": "https://github.com/horizon-rust/horizon",
+  "base_commit": "56f968e11c7627536cb6a83420caddce7e3acb8f",
+  "ely_reference": "https://github.com/Tsifrokayf/Elyhorizon",
+  "ely_commit": "333ca09d09476766ae3ffbf98bf41583df9f8b7d",
+  "files": [
+    {
+      "path": "README.md",
+      "before": "d2e4af6504b800846666547bac134c6fd760eadb1d563450c6666a2a63b3aa86",
+      "after": "bd607477609b6f6e7718d141913aee43b17dedde26f4bc579905881406886b00"
+    },
+    {
+      "path": "crates/horizon-client/src/auth.rs",
+      "before": "710916fdce7484ee459bc523776c942b5ccc420a8da77e01add59cb234527d71",
+      "after": "4eabeacfe300492acffe24e8050cd69ecde2454c38c9057ae9dcc55eae476409"
+    },
+    {
+      "path": "crates/horizon-client/src/ely_skins.rs",
+      "before": null,
+      "after": "6485fc2a9d96803aa0c6238dbe394e1743da3b8c4dfe0690a8f1e5f2e3e0c096"
+    },
+    {
+      "path": "crates/horizon-client/src/game/remote.rs",
+      "before": "574119c2b38ab6d6476348a3f92710077a2f8ba382aba321a24bb09553621a15",
+      "after": "6261f2bd962364ebf57865df6477126dcfd3a188f5731fb04c6b50bf0b65b0c9"
+    },
+    {
+      "path": "crates/horizon-client/src/main.rs",
+      "before": "32a26046c59f830d5afea703362f1f7e1a2499736c89391385eb9fe2b7e85697",
+      "after": "392abf4053abfd55850887f32f8ed38adc304496fe660c5b2551b3b3b228f2f5"
+    },
+    {
+      "path": "crates/horizon-client/src/skins.rs",
+      "before": "01bed4d26be01b1ea8e08414aeee18eb8c28d706bb20e0dd743729592858a4a7",
+      "after": "fbc14e6f3189b2c0c68e2599fc31f954f3d9a854b7098c6f0cd483e09fb505c8"
+    },
+    {
+      "path": "docs/ely-account.md",
+      "before": null,
+      "after": "f376ea802235fdb7d7ad958c17decc903c16cead85202cc3e2f647195feb0e19"
+    },
+    {
+      "path": "docs/launcher-commands.md",
+      "before": "9627c7cf235559d7a5123fb35ef047d2dffc28d394a5e875807c3c2f98df6077",
+      "after": "9638d4efa1d7b74c173af4deae93fc60edb449ef0cfc3036999aa7902ea46441"
+    },
+    {
+      "path": "docs/microsoft-account.md",
+      "before": "05b585fd678027e3daa4e09326cab1acaa3fae3664dbfcdda6a7c0cecab66b56",
+      "after": "1bbed3e6bed159806a2838f1d07fd4b756fd6f8251dd7a312f11a8093317a6a2"
+    },
+    {
+      "path": "launcher/README.md",
+      "before": "e5cf49fe823a466d68ab38e02e1812293a321f41382314641e06438707f7c809",
+      "after": "bbd05b8a27fc0f30f11a87cbf4c74bd36a2bbb3917b4de169e45504b200c0803"
+    },
+    {
+      "path": "launcher/lang/fr.json",
+      "before": "182ffea1c8a7ac9a134325ef796b1aee033807fa0cb5f2739dd364a95947b8c4",
+      "after": "71a2f0b4dd6a9184c221fbf5e2de9af72504a4faae67709fd8e81a7cd21d7747"
+    },
+    {
+      "path": "launcher/lang/ru.json",
+      "before": "47abeeb522c8f6524c3ae4fe52e9b61b764ea2062360b39542ae1136c9bb470f",
+      "after": "7bbbe325ad051fba6e1ae1bf4abb78bb9e257174c199069479d56e03a4a10973"
+    },
+    {
+      "path": "launcher/src/account.rs",
+      "before": "c8010af9c141b0d6d03e33445851980b133bd3b15d78e5fe71f0adc6d5bb0c3a",
+      "after": "0bcdd4719a5ff40a4b6852732f5aee0932fac2ec5fa472ec7591550aff182c70"
+    },
+    {
+      "path": "launcher/src/account/tests.rs",
+      "before": "88daa9a399331722f877a82375c7687e0ba4f5a90094cce32d29116b27a5ee48",
+      "after": "4c8a67cec0ee088a5512bc8ce3704845a049335db80025a891d082b5ec57fc1d"
+    },
+    {
+      "path": "launcher/src/backend.rs",
+      "before": "4719574efb05653bb916e922dd6b7eb3122edae43896d93e9ca6b770b783adc3",
+      "after": "f34c80c358095b944a3872305787f0b7c004747f6fd2992d0b7983d907603802"
+    },
+    {
+      "path": "launcher/src/cli.rs",
+      "before": "b84dd2c76db109ab5fc1d85d0b0bde81f2be61753698749925812ad22d110d11",
+      "after": "63365da4c78902d9d4cec45fad2a4ef7172ab3b1ad65a76d9895588ea71f2673"
+    },
+    {
+      "path": "launcher/src/main.rs",
+      "before": "d530606ae7774049de364937360c24edac2df5860901aeef25e71f1f04dd7903",
+      "after": "bd2cb5d648c191fbae1f4c2e93505a1b3999d60176976178e8e6b63cc7cd7ef9"
+    },
+    {
+      "path": "launcher/src/mcp.rs",
+      "before": "c2d5ea0b39b8a23bb58f8e65836ec94ec0206313231812c41d145d31fa6ca24f",
+      "after": "d89b90eac14e66288e0ee69edf3a93366668a977ac4d7a065d185c40ad505173"
+    },
+    {
+      "path": "launcher/src/owner_page.rs",
+      "before": "3a5ddc3a4f3cdf79cbd14dad922b455f6dd79f5fd82c548679a50d6c45690534",
+      "after": "65938bbb2e851e49aa323b6003d11ff770d5ba0bc9f43601e2a3eb1557deacd0"
+    },
+    {
+      "path": "launcher/src/switch_page.rs",
+      "before": "b3c34caf2637d04375763b54a983b79359af9e5d91816be562bdad828d447e92",
+      "after": "2ec871bef250e94b887dea72f9c9cc626ed5ad1f37aa63e0c1564e65ed61d97d"
+    },
+    {
+      "path": "launcher/tests/owner_gate.rs",
+      "before": "a73edbf6dc1acbcabe4b1060a8c0ce55903d0987234d6a8b87eb71b9dafca5cf",
+      "after": "17cbbdfd8c766c0a647781a5ab018f1ff322c3a2d1b93eb73e2b8b3792188fce"
+    }
+  ]
+}

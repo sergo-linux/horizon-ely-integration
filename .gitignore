@@ -1,0 +1,7 @@
+.research/
+__pycache__/
+*.pyc
+dist/
+work/
+.DS_Store
+*.local

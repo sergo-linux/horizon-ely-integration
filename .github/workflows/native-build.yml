@@ -1,0 +1,64 @@
+name: Experimental native builds
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-14]
+    runs-on: ${{ matrix.os }}
+    env:
+      HORIZON_ELY_CLIENT_ID: ${{ vars.HORIZON_ELY_CLIENT_ID }}
+      HORIZON_LAUNCHER_VERSION: 0.0.0-ely-experimental
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: patch-package
+      - uses: actions/checkout@v4
+        with:
+          repository: horizon-rust/horizon
+          ref: 56f968e11c7627536cb6a83420caddce7e3acb8f
+          path: upstream
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Require the maintainer's Ely.by application
+        run: |
+          test -n "$HORIZON_ELY_CLIENT_ID" || { echo 'Set repository variable HORIZON_ELY_CLIENT_ID first.'; exit 1; }
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Linux build dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxkbcommon-x11-dev libwayland-dev libx11-xcb-dev libfontconfig-dev libvulkan-dev libasound2-dev libudev-dev pkg-config
+      - name: macOS runtime shaders
+        if: runner.os == 'macOS'
+        run: |
+          if ! xcrun metal --version > /dev/null 2>&1; then
+            echo 'LAUNCHER_FEATURES=gpui/runtime_shaders' >> "$GITHUB_ENV"
+          fi
+      - run: python patch-package/horizon_ely.py apply --source upstream
+      - name: Account and provider unit tests
+        run: cargo test --locked --manifest-path upstream/launcher/Cargo.toml --lib account::tests ${LAUNCHER_FEATURES:+--features "$LAUNCHER_FEATURES"}
+      - name: Texture routing unit tests
+        working-directory: upstream
+        run: cargo test --locked -p horizon-client --lib skins::ely_skins
+      - name: Build the launcher
+        run: cargo build --locked --release --manifest-path upstream/launcher/Cargo.toml ${LAUNCHER_FEATURES:+--features "$LAUNCHER_FEATURES"}
+      - name: Build the matching native client
+        working-directory: upstream
+        run: cargo build --locked --release -p horizon-client --bin horizon-client
+      - run: python patch-package/horizon_ely.py bundle --source upstream --out native-bundle
+      - uses: actions/upload-artifact@v4
+        with:
+          name: horizon-ely-experimental-${{ matrix.os }}
+          path: native-bundle/
+          if-no-files-found: error

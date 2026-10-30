@@ -1,0 +1,39 @@
+name: Check patch package
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  python:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -v
+  upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: patch-package
+      - uses: actions/checkout@v4
+        with:
+          repository: horizon-rust/horizon
+          ref: 56f968e11c7627536cb6a83420caddce7e3acb8f
+          path: upstream
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python patch-package/horizon_ely.py check --source upstream
+      - run: python patch-package/horizon_ely.py apply --source upstream
+      - run: git -C upstream diff --check
+      - run: python patch-package/horizon_ely.py rollback --source upstream
+      - run: git -C upstream diff --exit-code
