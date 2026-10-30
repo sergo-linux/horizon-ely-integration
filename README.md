@@ -58,7 +58,7 @@ Apple Silicon. Intel Mac, ARM Linux и Windows ARM не подтверждены
 Не применяйте его поверх предыдущего `patch-horizon-offline.ps1`.
 
 ```bash
-git clone https://github.com/horizon-rust/horizon.git horizon-local
+git clone -c core.autocrlf=false https://github.com/horizon-rust/horizon.git horizon-local
 git -C horizon-local checkout --detach 56f968e11c7627536cb6a83420caddce7e3acb8f
 python3 horizon_ely.py check --source horizon-local
 python3 horizon_ely.py apply --source horizon-local
@@ -66,6 +66,9 @@ python3 horizon_ely.py status --source horizon-local
 ```
 
 PowerShell: используйте `py -3` вместо `python3`, либо оболочку:
+
+Параметр `-c core.autocrlf=false` в команде `clone` сохраняет исходные LF
+в этой копии репозитория. Это необходимо для точной проверки SHA-256 на Windows.
 
 ```powershell
 .\patch.ps1 check --source C:\src\horizon-local

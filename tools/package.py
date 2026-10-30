@@ -11,7 +11,7 @@ archive = out / 'horizon-elyby-integration.zip'
 roots = ['horizon_ely.py', 'patch.sh', 'patch.ps1', 'bootstrap.py', 'bootstrap.sh',
          'bootstrap.ps1', 'README.md', 'PUBLISHING.md', 'VALIDATION.md',
          'THIRD_PARTY_NOTICES.md', 'LICENSE', 'compatibility.json', 'horizon-ely.patch',
-         '.gitignore', '.github', 'native', 'payload', 'tests', 'tools']
+         '.gitignore', '.gitattributes', '.github', 'native', 'payload', 'tests', 'tools']
 files = []
 for name in roots:
     path = root / name
