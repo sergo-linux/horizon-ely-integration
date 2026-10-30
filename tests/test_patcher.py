@@ -2,6 +2,7 @@
 import hashlib
 import importlib.util
 import json
+import io
 from pathlib import Path
 import tempfile
 import unittest
@@ -92,6 +93,15 @@ class TransactionTests(unittest.TestCase):
                     'https://user:password@ely.by/a', 'https://127.0.0.1/a']:
             with self.assertRaises(module.PatchError):
                 module.public_get(url, 1024)
+
+    def test_windows_output_supports_russian_in_pipes(self):
+        binary = io.BytesIO()
+        stream = io.TextIOWrapper(binary, encoding='cp1252')
+        with patch.object(module.os, 'name', 'nt'), patch.object(module.sys, 'stdout', stream):
+            module.configure_output()
+            print('Проверка кодировки')
+            stream.flush()
+        self.assertEqual(binary.getvalue().decode('utf-8'), 'Проверка кодировки\n')
 
 
 if __name__ == '__main__':

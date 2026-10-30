@@ -3,14 +3,21 @@
 import argparse
 import hashlib
 import io
+import os
 from pathlib import Path, PurePosixPath
 import re
 import shutil
 import stat
+import sys
 import tempfile
 import urllib.parse
 import urllib.request
 import zipfile
+
+if os.name == 'nt':
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, 'reconfigure'):
+            stream.reconfigure(encoding='utf-8', errors='backslashreplace')
 
 
 class GitHubRedirects(urllib.request.HTTPRedirectHandler):

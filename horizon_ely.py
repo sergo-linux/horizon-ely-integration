@@ -20,6 +20,17 @@ PACKAGE = Path(__file__).resolve().parent
 STATE = '.horizon-ely-patch'
 
 
+def configure_output() -> None:
+    # Windows pipes may otherwise use cp1252 and reject Russian messages.
+    if os.name == 'nt':
+        for stream in (sys.stdout, sys.stderr):
+            if hasattr(stream, 'reconfigure'):
+                stream.reconfigure(encoding='utf-8', errors='backslashreplace')
+
+
+configure_output()
+
+
 class PatchError(Exception):
     pass
 
