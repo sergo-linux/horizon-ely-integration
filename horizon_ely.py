@@ -215,13 +215,22 @@ def bundle(root: Path, destination: Path, target: str | None) -> None:
     marker = b'HORIZON_ELY_NATIVE_V1'
     if marker not in client.read_bytes() or marker not in launcher.read_bytes():
         raise PatchError('В бинарных файлах нет маркера интеграции. Нужна пересборка.')
+    from installed import binary_target
+    system, architecture = binary_target(launcher)
+    if binary_target(client) != (system, architecture):
+        raise PatchError('Лаунчер и клиент собраны для разных платформ.')
     if destination.exists():
         raise PatchError('Каталог назначения уже существует. Выберите новый каталог.')
     destination.mkdir(parents=True)
     for path in (launcher, client):
         shutil.copy2(path, destination / path.name)
-    shutil.copy2(PACKAGE / 'THIRD_PARTY_NOTICES.md', destination)
-    shutil.copy2(PACKAGE / 'LICENSE', destination)
+    for name in ('THIRD_PARTY_NOTICES.md', 'LICENSE', 'installed.py', 'INSTALLED.md'):
+        shutil.copy2(PACKAGE / name, destination)
+    names = [launcher.name, client.name, 'THIRD_PARTY_NOTICES.md', 'LICENSE', 'installed.py', 'INSTALLED.md']
+    info = {'schema': 1, 'base_commit': state['base_commit'],
+            'system': system, 'architecture': architecture, 'runtime_verified': False,
+            'files': {name: digest((destination / name).read_bytes()) for name in names}}
+    atomic_write(destination / 'BUNDLE.json', json.dumps(info, indent=2).encode())
     print('Два бинарных файла собраны в:', destination)
     print('Программа не запускалась. Это не установщик и не проверка работоспособности.')
 

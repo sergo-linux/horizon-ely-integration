@@ -30,9 +30,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Require the maintainer's Ely.by application
+      - name: Report Ely.by application configuration
         run: |
-          test -n "$HORIZON_ELY_CLIENT_ID" || { echo 'Set repository variable HORIZON_ELY_CLIENT_ID first.'; exit 1; }
+          if [ -z "$HORIZON_ELY_CLIENT_ID" ]; then
+            echo '::notice::No Ely.by client ID: building local profiles only. Ely.by sign-in will be unavailable.'
+          fi
       - uses: dtolnay/rust-toolchain@stable
       - name: Linux build dependencies
         if: runner.os == 'Linux'

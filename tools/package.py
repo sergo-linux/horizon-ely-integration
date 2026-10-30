@@ -8,7 +8,7 @@ root = Path(__file__).resolve().parents[1]
 out = root / 'dist'
 out.mkdir(exist_ok=True)
 archive = out / 'horizon-elyby-integration.zip'
-roots = ['horizon_ely.py', 'patch.sh', 'patch.ps1', 'bootstrap.py', 'bootstrap.sh',
+roots = ['horizon_ely.py', 'installed.py', 'INSTALLED.md', 'patch.sh', 'patch.ps1', 'bootstrap.py', 'bootstrap.sh',
          'bootstrap.ps1', 'README.md', 'PUBLISHING.md', 'VALIDATION.md',
          'THIRD_PARTY_NOTICES.md', 'LICENSE', 'compatibility.json', 'horizon-ely.patch',
          '.gitignore', '.gitattributes', '.github', 'native', 'payload', 'tests', 'tools']
